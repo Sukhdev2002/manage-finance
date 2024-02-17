@@ -7,7 +7,8 @@
     "dev": "nodemon -L ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "ENVIRONMENT=$ENVIRONMENT webpack",
-    "prod-build": "ENVIRONMENT='production' gulp"
+    "prod-build": "ENVIRONMENT='production' gulp",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",

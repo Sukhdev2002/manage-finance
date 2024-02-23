@@ -6,7 +6,7 @@ while update api send in body also
 ``const token = localStorage.getItem('token');
 const decodedToken = jwt_decode(token|| ''); // Decode the JWT token to extract the user ID
 const userId = decodedToken?.userId;
-const response = await fetch('http://localhost:5000/api/expenses', {
+const response = await fetch('https://self-manage-finance.onrender.com/api/expenses', {
 method: 'POST',
 headers: {
 'Content-Type': 'application/json',

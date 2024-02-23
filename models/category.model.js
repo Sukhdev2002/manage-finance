@@ -14,7 +14,8 @@ const categorySchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
-    }
+    },
+    date: { type: Date, default: Date.now }
 });
 
 const Category = mongoose.model('Category', categorySchema);

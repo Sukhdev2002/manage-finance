@@ -4,6 +4,18 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
 const logger = require('../logger/api.logger');
 
+
+exports.getUser = async (req, res) => {
+    try {
+        const expenses = await expenseService.getUserData(req);
+        logger.info('User retrieved successfully');
+        return expenses;
+    } catch (error) {
+        logger.error(`Error fetching user: ${error.message}`);
+        throw new Error('Error fetching user');
+    }
+};
+
 exports.register = async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -28,7 +40,7 @@ exports.login = async (req, res) => {
         if (!validPassword) {
             return res.status(401).json({ message: 'Invalid username or password' });
         }
-        const token = jwt.sign({ userId: user._id }, 'secretKey', { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user._id }, 'secretKey', { expiresIn: '24h' });
         res.json({ token });
     } catch (error) {
         logger.error(`Error logging in user: ${error.message}`);

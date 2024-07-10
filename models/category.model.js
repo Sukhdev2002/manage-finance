@@ -2,7 +2,8 @@
 const mongoose = require('mongoose');
 
 const categorySchema = new mongoose.Schema({
-    name: {
+    moduleCode: { type: String },
+    category: {
         type: String,
         required: true
     },
@@ -10,7 +11,7 @@ const categorySchema = new mongoose.Schema({
         type: [String],
         default: []
     },
-    user: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true

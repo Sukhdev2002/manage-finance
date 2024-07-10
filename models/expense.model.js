@@ -2,12 +2,19 @@
 const mongoose = require('mongoose');
 
 const expenseSchema = new mongoose.Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    category: String,
-    subcategory: String,
-    amount: Number,
-    comment: String,
-    date: { type: Date, default: Date.now }
+  moduleCode: { type: String },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  category: {
+    name: { type: String, required: true },
+    id: { type: String, required: true }
+  },
+  subcategory: {
+    name: { type: String, required: true },
+    id: { type: String, required: true }
+  },
+  amount: { type: Number, required: true },
+  comment: { type: String },
+  date: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('Expense', expenseSchema);

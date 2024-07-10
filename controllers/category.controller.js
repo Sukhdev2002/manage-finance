@@ -6,8 +6,8 @@ const logger = require("../logger/api.logger");
 
 exports.getCategories = async (req, res) => {
     try {
-        const userId = req.user.userId;
-        const categories = await categoryService.getCategoriesByUser(userId);
+        
+        const categories = await categoryService.getCategoriesByUser(req);
         return categories;
     } catch (error) {
         logger.error(`Error fetching categories: ${error.message}`);
@@ -19,9 +19,8 @@ exports.getCategories = async (req, res) => {
 
 exports.addCategory = async (req, res) => {
     try {
-        const { category, subcategories } = req.body;
-        const userId = req.user.userId;
-        const newCategory = await categoryService.addCategory(category, subcategories, userId);
+    
+        const newCategory = await categoryService.addCategory({ ...req.body, userId: req.user.userId });
         logger.info('Category added successfully');
         return newCategory;
         

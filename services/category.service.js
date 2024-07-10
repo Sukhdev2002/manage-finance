@@ -1,22 +1,22 @@
 // services/category.service.js
 const Category = require('../models/category.model');
-
-exports.getCategoriesByUser = async (userId) => {
+const utils = require('../utils/utils');
+exports.getCategoriesByUser = async (req) => {
     try {
-        return await Category.find({ user: userId });
+        let query = utils.buildQuery(req.user.userId, req.query);
+        return await Category.find(query);
     } catch (error) {
         throw new Error('Error fetching categories: ' + error.message);
     }
 };
 
-exports.addCategory = async (name, subcategories, userId) => {
+exports.addCategory = async (data) => {
     try {
-        const newCategory = new Category({
-            name,
-            subcategories,
-            user: userId
-        });
-        return await newCategory.save();
+        
+       
+        const newCategory = new Category(data);
+        let CategoryData =  await newCategory.save();
+        return CategoryData;
     } catch (error) {
         throw new Error('Error adding category: ' + error.message);
     }

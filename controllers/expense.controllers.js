@@ -4,7 +4,7 @@ const logger = require('../logger/api.logger');
 
 exports.getExpenses = async (req, res) => {
     try {
-        const expenses = await expenseService.getExpensesByUserId(req.user.userId);
+        const expenses = await expenseService.getExpensesByUserId(req);
         logger.info('Expenses retrieved successfully');
         return expenses;
     } catch (error) {
@@ -16,6 +16,11 @@ exports.getExpenses = async (req, res) => {
 exports.addExpense = async (req, res) => {
     try {
         const expenseData = { ...req.body, userId: req.user.userId };
+        expenseData.category = JSON.parse(expenseData.category);
+        expenseData.subcategory = JSON.parse(expenseData.subcategory);
+        logger.info(expenseData);
+        logger.info("===============");
+        console.log(expenseData);
         const expense = await expenseService.addExpense(expenseData);
         logger.info('Expense added successfully');
         return expense;

@@ -1,10 +1,12 @@
 // services/expense.services.js
 const Expense = require('../models/expense.model');
 const logger = require('../logger/api.logger');
-
-exports.getExpensesByUserId = async (userId) => {
+const utils = require('../utils/utils')
+exports.getExpensesByUserId = async (req) => {
     try {
-        const expenses = await Expense.find({ userId });
+        let userId = req.user.userId;
+        let query = utils.buildQuery(userId, req.query);
+        const expenses = await Expense.find(query);
         return expenses;
     } catch (error) {
         logger.error(`Error fetching expenses: ${error.message}`);

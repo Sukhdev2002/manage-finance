@@ -9,9 +9,7 @@ const connect = () => {
     // "mongodb+srv://admin:ZMQCMKY3HfXsVE8D@cluster0.pfdfh.mongodb.net/?retryWrites=true&w=majority"
     mongoose.connect(url, {
         useNewUrlParser: true,
-        useFindAndModify: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,
+        useUnifiedTopology: true
     })
 
     mongoose.connection.once("open", async () => {

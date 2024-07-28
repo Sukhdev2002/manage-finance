@@ -33,10 +33,10 @@ exports.addCategory = async (req, res) => {
 
 exports.updateCategory = async (req, res) => {
     try {
-        const { id } = req.params;
-        const { category, subcategories } = req.body;
+        const { categoryId } = req.params;
+        const { category } = req.body;
         const userId = req.user.userId;
-        const updatedCategory = await categoryService.updateCategory(id, category, subcategories, userId);
+        const updatedCategory = await categoryService.updateCategory(categoryId, category, userId);
         logger.info(`Category with ID ${categoryId} updated successfully`);
         return updatedCategory;
     } catch (error) {
@@ -47,9 +47,9 @@ exports.updateCategory = async (req, res) => {
 
 exports.deleteCategory = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { categoryId } = req.params;
         const userId = req.user.userId;
-        await categoryService.deleteCategory(id, userId);
+        await categoryService.deleteCategory(categoryId, userId);
         logger.info(`Category with ID ${categoryId} deleted successfully`);
     } catch (error) {
         logger.error(`Error deleting category: ${error.message}`);

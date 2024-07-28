@@ -22,13 +22,13 @@ exports.addCategory = async (data) => {
     }
 };
 
-exports.updateCategory = async (id, name, subcategories, userId) => {
+exports.updateCategory = async (id, category, userId) => {
     try {
-        const category = await Category.findOneAndUpdate({ _id: id, user: userId }, { name, subcategories }, { new: true });
-        if (!category) {
+        const categoryData = await Category.findOneAndUpdate({ _id: id, userId  }, { category }, { new: true });
+        if (!categoryData) {
             throw new Error('Category not found or unauthorized');
         }
-        return category;
+        return categoryData;
     } catch (error) {
         throw new Error('Error updating category: ' + error.message);
     }
@@ -36,7 +36,7 @@ exports.updateCategory = async (id, name, subcategories, userId) => {
 
 exports.deleteCategory = async (id, userId) => {
     try {
-        const result = await Category.deleteOne({ _id: id, user: userId });
+        const result = await Category.deleteOne({ _id: id, userId: userId });
         if (result.deletedCount === 0) {
             throw new Error('Category not found or unauthorized');
         }

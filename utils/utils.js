@@ -1,3 +1,7 @@
+
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
+
 const buildQuery = (userId, queryParams) => {
     const { month, moduleCode, category, subcategory } = queryParams;
     const query = { userId };
@@ -31,4 +35,40 @@ const buildQuery = (userId, queryParams) => {
     return query;
 };
 
-module.exports = {buildQuery}
+
+
+const generateOTP = (length = 6) => {
+    const digits = '0123456789';
+    let otp = '';
+    for (let i = 0; i < length; i++) {
+        otp += digits[Math.floor(Math.random() * digits.length)];
+    }
+    return otp;
+};
+
+const sendEmail = async (to, subject, text) => {
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        secure: true,
+        auth: {
+            user: 'expensebuddy9@gmail.com',
+            pass: "uogcbatookkiyryk"
+        }
+    });
+
+    const mailOptions = {
+        from: 'expensebuddy9@gmail.com',
+        to,
+        subject,
+        text
+    };
+
+    return transporter.sendMail(mailOptions);
+};
+
+module.exports = {
+    generateOTP,
+    sendEmail,
+    buildQuery
+};
+

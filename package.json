@@ -5,22 +5,13 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon -L ./server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "ENVIRONMENT=$ENVIRONMENT webpack",
-    "prod-build": "ENVIRONMENT='production' gulp",
     "start": "node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bbachi/nodejs-restapi-mongo.git"
-  },
+ 
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bbachi/nodejs-restapi-mongo/issues"
-  },
-  "homepage": "https://github.com/bbachi/nodejs-restapi-mongo#readme",
+
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",

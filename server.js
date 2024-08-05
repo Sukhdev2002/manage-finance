@@ -16,7 +16,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/expenses', expenseRoutes);
 app.use('/api/category', categoryRoutes)
 app.use('/api/subcategory', subcategoryRoutes)
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 9000;
 app.listen(PORT, () => {
     logger.info(`Server started on port ${PORT}`);
 });       
